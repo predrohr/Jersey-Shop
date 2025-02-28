@@ -1,7 +1,7 @@
-function Item ({item}) {
+function Item ({item, selectProduct}) {
     return (
         <>
-        <div className={`product ${item.isInBag ? 'selectec' : ''}`}>
+        <div onClick={()=> selectProduct(item.id)} className={`product ${item.isInBag ? 'selectec' : ''}`}>
                     <div className="photo">
                         <img src={"./img/" + item.photo} />
                     </div>
