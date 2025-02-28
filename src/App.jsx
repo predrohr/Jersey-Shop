@@ -1,10 +1,12 @@
 import './App.css';
+import { useState } from 'react';
 import OrderDetails from './components/OrderDetails';
 import Item from './components/Item';
 
+
 function App() {
 
-    const items = [
+    const [items, setItems] =  useState([
         {
             
             id: 1, 
@@ -86,11 +88,17 @@ function App() {
             quantity: 1, 
             isInBag: false
         }
-    ];
+    ]);
 
     const itemsInBag = items.filter(item => item.isInBag)
 
     const shopName = "Jersey Shop Made with React JS"
+
+    function selectHendler (id){
+        let item = items.filter(item => item.id === id)[0];
+        item.isInBag = !item.isInBag;
+        setItems(items.map(it => it.id === id ? item : it));    
+    }
 
     return ( 
         <>
@@ -99,7 +107,7 @@ function App() {
                 
                 {items.map(item => <>{
                     <Item 
-                    selectProduct={(id) => alert(`clicked product ${id}`)} 
+                    selectProduct={(id) => selectHendler(id)} 
                     item={item} 
                     key={item.id}
                     />
