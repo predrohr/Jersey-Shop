@@ -100,6 +100,13 @@ function App() {
         setItems(items.map(it => it.id === id ? item : it));    
     }
 
+    function quantityHendler(e, id, increment){
+        e.stopPropagation();
+        let item = items.filter(item => item.id === id)[0];
+        item.quantity += increment;
+        setItems(items.map(it => it.id === id ? item : it)); 
+    }
+
     return ( 
         <>
             <section className="items">
@@ -108,6 +115,7 @@ function App() {
                 {items.map(item => <>{
                     <Item 
                     selectProduct={(id) => selectHendler(id)} 
+                    changeQuantity={(e, id, increment) => quantityHendler(e, id, increment)}
                     item={item} 
                     key={item.id}
                     />
